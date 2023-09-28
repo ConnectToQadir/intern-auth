@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/about.html">About</a></li>
+        <li><a href="/login.html">Login</a></li>
+        <li><a href="/register.html">Register</a></li>
+    </ul>
+
+
+    <form onsubmit="handleLogin(event)">
+        <input placeholder="Username" id="username" type="text">
+        <input placeholder="Password" id="password" type="password">
+        <input type="submit">
+    </form>
+
+    <h1>This is our Login page</h1>
+
+
+    <script>
+
+        const handleLogin = async (event) => {
+            event.preventDefault()
+
+            var data = {
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+            }
+
+            var res = await fetch('/api/user/login',{
+                method:"POST",
+                headers:{
+                    'content-type':'application/json'
+                },
+                body:JSON.stringify(data)
+            })
+
+            res = await res.json()
+
+            if(res.success){
+                alert(res.message)
+            }else{
+                alert(res.message)
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>
